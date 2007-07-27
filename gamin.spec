@@ -4,15 +4,11 @@
 
 Summary: Library providing the FAM File Alteration Monitor API
 Name: gamin
-Version: 0.1.8
-Release: %mkrel 2
+Version: 0.1.9
+Release: %mkrel 1
 License: LGPL
 Group: Monitoring
-Source0: http://www.gnome.org/~veillard/gamin/sources/gamin-%{version}.tar.bz2
-# (fc) 0.1.8-1mdv fix polling on NFS (CVS)
-Patch0: gamin-0.1.7-fix-polling.patch
-# (fc) 0.1.8-2mdv fix poll to be conditionnal (CVS)
-Patch1: gamin-conditional-poll.patch
+Source0: http://www.gnome.org/~veillard/gamin/sources/gamin-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 URL: http://www.gnome.org/~veillard/gamin/
 Obsoletes: fam
@@ -68,8 +64,6 @@ daemon.
 
 %prep
 %setup -q
-%patch0 -p1 -b .fix-polling
-%patch1 -p1 -b .conditional-poll
 
 %build
 %configure2_5x --enable-inotify
