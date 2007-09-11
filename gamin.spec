@@ -5,10 +5,12 @@
 Summary: Library providing the FAM File Alteration Monitor API
 Name: gamin
 Version: 0.1.9
-Release: %mkrel 1
+Release: %mkrel 2
 License: LGPL
 Group: Monitoring
 Source0: http://www.gnome.org/~veillard/gamin/sources/gamin-%{version}.tar.gz
+# (fc) 0.1.9-2mdv fix ABI/API compatibility with fam (SVN)
+Patch0: gamin-0.1.9-fixcompat.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 URL: http://www.gnome.org/~veillard/gamin/
 Obsoletes: fam
@@ -64,6 +66,7 @@ daemon.
 
 %prep
 %setup -q
+%patch0 -p1 -b .fixcompat
 
 %build
 %configure2_5x --enable-inotify
