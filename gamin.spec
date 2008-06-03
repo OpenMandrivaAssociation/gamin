@@ -15,8 +15,8 @@ Patch0: gamin-0.1.9-fixcompat.patch
 Patch1: gamin-0.1.9-poll-less.patch
 # (fc) 0.1.9-4mdv fix filesystem leak (GNOME bug #403158) (SVN)
 Patch2: gamin-0.1.9-filesystem-leak.patch
-# (fc) 0.1.9-4mdv fix missing struct ucred in glibc headers (Fedora)
-Patch3: gamin-0.1.9-ucred-headers.patch
+# (fc) 0.1.9-4mdv fix missing struct ucred with latest glibc (SVN)
+Patch3: gamin-0.1.9-ucred.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 URL: http://www.gnome.org/~veillard/gamin/
 Obsoletes: fam
@@ -76,6 +76,9 @@ daemon.
 %patch1 -p1 -b .poll-less
 %patch2 -p1 -b .fd-leak
 %patch3 -p1 -b .ucred
+
+#needed by patch3
+autoreconf
 
 %build
 %configure2_5x --enable-inotify
