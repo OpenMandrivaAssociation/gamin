@@ -5,7 +5,7 @@
 Summary: Library providing the FAM File Alteration Monitor API
 Name: gamin
 Version: 0.1.10
-Release: %mkrel 4
+Release: %mkrel 5
 License: LGPLv2+
 Group: Monitoring
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/gamin-%{version}.tar.bz2
