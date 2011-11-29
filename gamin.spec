@@ -14,7 +14,7 @@ Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/gamin-%{version}.tar.bz2
 Patch0:	gamin-0.1.10_G_CONST_RETURN.patch
 BuildRequires: glib2-devel
 BuildRequires: python-devel
-Requires: %{libname} = %{version}-%{release}
+Requires: %{lib_name} = %{version}-%{release}
 
 %description
 This C library provides an API and ABI compatible file alteration
