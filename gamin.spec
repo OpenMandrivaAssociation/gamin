@@ -73,7 +73,7 @@ rm -f %buildroot%_libdir/python%pyver/site-packages/_gamin.a
 %{_libdir}/gam_server
 
 %files -n %{lib_name}
-%{_libdir}/lib*.so.%{major}*
+%{_libdir}/lib*.so.%{lib_major}*
 
 %files -n %{develname}
 %doc AUTHORS ChangeLog README Copyright TODO
