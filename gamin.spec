@@ -11,7 +11,7 @@ License: LGPLv2+
 Group: Monitoring
 URL: http://www.gnome.org/~veillard/gamin/
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/gamin-%{version}.tar.bz2
-
+Patch0:	gamin-0.1.10_G_CONST_RETURN.patch
 BuildRequires: glib2-devel
 BuildRequires: python-devel
 Requires: %{libname} = %{version}-%{release}
@@ -54,6 +54,7 @@ daemon.
 
 %prep
 %setup -q
+%apply_patches
 
 %build
 %configure2_5x \
