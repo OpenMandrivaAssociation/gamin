@@ -1,0 +1,46 @@
+Index: gamin-0.1.10/server/inotify-helper.c
+===================================================================
+--- gamin-0.1.10/server/inotify-helper.c
++++ gamin-0.1.10/server/inotify-helper.c	2012-01-03 23:55:35.420488530 +0200
+@@ -124,10 +124,9 @@
+ /**
+  * Cancels a subscription which was being monitored.
+  */
+-gboolean
+-ih_sub_cancel (ih_sub_t * sub)
++static gboolean
++ih_sub_cancel_locked (ih_sub_t * sub)
+ {
+-	G_LOCK(inotify_lock);
+ 
+ 
+ 	if (!sub->cancelled)
+@@ -140,7 +139,6 @@
+ 		sub_list = g_list_remove (sub_list, sub);
+ 	}
+ 
+-	G_UNLOCK(inotify_lock);
+ 	return TRUE;
+ }
+ 
+@@ -159,7 +157,7 @@
+ 		
+ 		if (f(sub, callerdata))
+ 		{
+-			ih_sub_cancel (sub); /* Removes sub from sub_list */
++			ih_sub_cancel_locked (sub); /* Removes sub from sub_list */
+ 			if (free)
+ 				ih_sub_free (sub);
+ 		}
+Index: gamin-0.1.10/server/inotify-helper.h
+===================================================================
+--- gamin-0.1.10/server/inotify-helper.h
++++ gamin-0.1.10/server/inotify-helper.h	2012-01-03 23:54:17.469874801 +0200
+@@ -34,7 +34,6 @@
+ 					 found_callback_t fcb);
+ gboolean	 ih_running		(void);
+ gboolean	 ih_sub_add		(ih_sub_t *sub);
+-gboolean	 ih_sub_cancel		(ih_sub_t *sub);
+ 
+ /* Return FALSE from 'f' if the subscription should be cancelled */
+ void		 ih_sub_foreach		(void *callerdata, gboolean (*f)(ih_sub_t *sub, void *callerdata));
