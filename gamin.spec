@@ -58,6 +58,9 @@ daemon.
 %apply_patches
 
 %build
+sed -i 's/AM_CONFIG_HEADER/AC_CONFIG_HEADER/g' configure.in
+sed -i 's/AM_PROG_CC_STDC/AC_PROG_CC/g' configure.in
+autoreconf --force --install
 %configure2_5x \
 	--disable-static \
 	--enable-inotify
