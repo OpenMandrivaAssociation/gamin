@@ -13,6 +13,7 @@ Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/gamin-%{version}.tar.bz2
 Patch0:		gamin-0.1.10_G_CONST_RETURN.patch
 # See http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=542361
 Patch1:		gamin-fix-deadlock.patch
+Patch2:		gamin-0.1.10-no-abstract-sockets.patch
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	python-devel
 Requires:	%{lib_name} = %{version}-%{release}
