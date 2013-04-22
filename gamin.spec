@@ -1,22 +1,27 @@
-%define lib_major 0
-%define lib_name %mklibname %{name}- 1 %{lib_major}
-%define develname %mklibname %{name}- 1 -d
+%define url_ver %(echo %{version}|cut -d. -f1,2)
+
+%define api	1
+%define major	0
+%define libname	%mklibname %{name} %{api} %{major}
+%define libfam	%mklibname fam %{major}
+%define devname	%mklibname %{name} -d
 
 Summary:	Library providing the FAM File Alteration Monitor API
 Name:		gamin
 Version:	0.1.10
-Release:	8
+Release:	9
 License:	LGPLv2+
 Group:		Monitoring
-URL:		http://www.gnome.org/~veillard/gamin/
-Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/gamin-%{version}.tar.bz2
+Url:		http://www.gnome.org/~veillard/gamin/
+Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gamin/%{url_ver}/gamin-%{version}.tar.bz2
 Patch0:		gamin-0.1.10_G_CONST_RETURN.patch
 # See http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=542361
 Patch1:		gamin-fix-deadlock.patch
 Patch2:		gamin-0.1.10-no-abstract-sockets.patch
 BuildRequires:	pkgconfig(glib-2.0)
-BuildRequires:	python-devel
-Requires:	%{lib_name} = %{version}-%{release}
+BuildRequires:	pkgconfig(python)
+Requires:	%{libname} = %{version}-%{release}
+Requires:	%{libfam} = %{version}-%{release}
 
 %description
 This C library provides an API and ABI compatible file alteration
@@ -32,24 +37,34 @@ This package contains a module that allow monitoring of
 files and directories from the Python language based on the support
 of the gamin package.
 
-%package -n %{lib_name}
+%package -n %{libname}
 Summary:	Dynamic library for Gamin
 Group:		System/Libraries
+Obsoletes:	%{_lib}gamin-1_0 < 0.1.10-9
 
-%description -n %{lib_name}
+%description -n %{libname}
 This C library provides an API and ABI compatible file alteration
 monitor mechanism compatible with FAM but not dependent on a system wide
 daemon.
 
-%package -n %{develname}
+%package -n %{libfam}
+Summary:	Dynamic library for Gamin
+Group:		System/Libraries
+Conflicts:	%{_lib}gamin-1_0 < 0.1.10-9
+
+%description -n %{libfam}
+This package contains a shared library for %{name}.
+
+%package -n %{devname}
 Summary:	Libraries, includes, etc. to embed the Gamin library
 Group:		Development/C
-Requires:	%{lib_name} = %{version}
+Requires:	%{libname} = %{version}
+Requires:	%{libfam} = %{version}
 Provides:	%{name}-devel = %{version}
 Provides:	fam-devel
-Obsoletes:	%{mklibname gamin- 1 0 -d} < %{version}-%{release}
+Obsoletes:	%{_lib}gamin-1-devel < 0.1.10-9
 
-%description -n %{develname}
+%description -n %{devname}
 This C library provides an API and ABI compatible file alteration
 monitor mechanism compatible with FAM but not dependent on a system wide
 daemon.
@@ -61,7 +76,7 @@ daemon.
 %build
 sed -i 's/AM_CONFIG_HEADER/AC_CONFIG_HEADER/g' configure.in
 sed -i 's/AM_PROG_CC_STDC/AC_PROG_CC/g' configure.in
-autoreconf --force --install
+autoreconf -fi
 %configure2_5x \
 	--disable-static \
 	--enable-inotify
@@ -76,10 +91,13 @@ rm -f %{buildroot}%{_libdir}/python%{pyver}/site-packages/_gamin.a
 %doc AUTHORS ChangeLog README Copyright TODO
 %{_libdir}/gam_server
 
-%files -n %{lib_name}
-%{_libdir}/lib*.so.%{lib_major}*
+%files -n %{libname}
+%{_libdir}/libgamin-%{api}.so.%{major}*
 
-%files -n %{develname}
+%files -n %{libfam}
+%{_libdir}/libfam.so.%{major}*
+
+%files -n %{devname}
 %doc AUTHORS ChangeLog README Copyright TODO
 %{_libdir}/lib*.so
 %{_libdir}/libgamin_shared.a
