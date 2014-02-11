@@ -89,7 +89,7 @@ rm -f %{buildroot}%{_libdir}/python%{pyver}/site-packages/_gamin.a
 
 %files
 %doc AUTHORS ChangeLog README Copyright TODO
-%{_libdir}/gam_server
+%{_libexecdir}/gam_server
 
 %files -n %{libname}
 %{_libdir}/libgamin-%{api}.so.%{major}*
