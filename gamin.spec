@@ -1,15 +1,15 @@
 %define url_ver %(echo %{version}|cut -d. -f1,2)
 
-%define api	1
-%define major	0
-%define libname	%mklibname %{name} %{api} %{major}
-%define libfam	%mklibname fam %{major}
-%define devname	%mklibname %{name} -d
+%define api 1
+%define major 0
+%define libname %mklibname %{name} %{api} %{major}
+%define libfam %mklibname fam %{major}
+%define devname %mklibname %{name} -d
 
 Summary:	Library providing the FAM File Alteration Monitor API
 Name:		gamin
 Version:	0.1.10
-Release:	13
+Release:	14
 License:	LGPLv2+
 Group:		Monitoring
 Url:		http://www.gnome.org/~veillard/gamin/
@@ -77,7 +77,7 @@ daemon.
 sed -i 's/AM_CONFIG_HEADER/AC_CONFIG_HEADER/g' configure.in
 sed -i 's/AM_PROG_CC_STDC/AC_PROG_CC/g' configure.in
 autoreconf -fi
-%configure2_5x \
+%configure \
 	--disable-static \
 	--enable-inotify
 
