@@ -18,6 +18,7 @@ Patch0:		gamin-0.1.10_G_CONST_RETURN.patch
 # See http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=542361
 Patch1:		gamin-fix-deadlock.patch
 Patch2:		gamin-0.1.10-no-abstract-sockets.patch
+Patch3:		clang_FTBFS_Wreturn-type.patch
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(python)
 Requires:	%{libname} = %{version}-%{release}
@@ -77,6 +78,7 @@ daemon.
 sed -i 's/AM_CONFIG_HEADER/AC_CONFIG_HEADER/g' configure.in
 sed -i 's/AM_PROG_CC_STDC/AC_PROG_CC/g' configure.in
 autoreconf -fi
+export PYTHON=%{_bindir}/python2
 %configure \
 	--disable-static \
 	--enable-inotify
@@ -107,5 +109,4 @@ rm -f %{buildroot}%{_libdir}/python%{pyver}/site-packages/_gamin.a
 %files -n python-%{name}
 %doc python/tests/*.py
 %doc doc/python.html
-%{py_platsitedir}/*gamin*
-
+%{py2_platsitedir}/*gamin*
