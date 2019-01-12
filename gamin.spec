@@ -9,7 +9,7 @@
 Summary:	Library providing the FAM File Alteration Monitor API
 Name:		gamin
 Version:	0.1.10
-Release:	21
+Release:	22
 License:	LGPLv2+
 Group:		Monitoring
 Url:		http://www.gnome.org/~veillard/gamin/
@@ -20,7 +20,7 @@ Patch1:		gamin-fix-deadlock.patch
 Patch2:		gamin-0.1.10-no-abstract-sockets.patch
 Patch3:		clang_FTBFS_Wreturn-type.patch
 BuildRequires:	pkgconfig(glib-2.0)
-BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(python2)
 Requires:	%{libname} = %{version}-%{release}
 Requires:	%{libfam} = %{version}-%{release}
 
