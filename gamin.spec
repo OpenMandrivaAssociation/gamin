@@ -9,7 +9,7 @@
 Summary:	Library providing the FAM File Alteration Monitor API
 Name:		gamin
 Version:	0.1.10
-Release:	22
+Release:	23
 License:	LGPLv2+
 Group:		Monitoring
 Url:		http://www.gnome.org/~veillard/gamin/
@@ -71,8 +71,7 @@ monitor mechanism compatible with FAM but not dependent on a system wide
 daemon.
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 
 %build
 sed -i 's/AM_CONFIG_HEADER/AC_CONFIG_HEADER/g' configure.in
@@ -83,10 +82,10 @@ export PYTHON=%{_bindir}/python2
 	--disable-static \
 	--enable-inotify
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 rm -f %{buildroot}%{_libdir}/python%{pyver}/site-packages/_gamin.a
 
 %files
