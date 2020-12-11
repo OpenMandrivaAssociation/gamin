@@ -9,16 +9,16 @@
 Summary:	Library providing the FAM File Alteration Monitor API
 Name:		gamin
 Version:	0.1.10
-Release:	23
+Release:	24
 License:	LGPLv2+
 Group:		Monitoring
 Url:		http://www.gnome.org/~veillard/gamin/
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gamin/%{url_ver}/gamin-%{version}.tar.bz2
-Patch0:		gamin-0.1.10_G_CONST_RETURN.patch
-# See http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=542361
-Patch1:		gamin-fix-deadlock.patch
+Patch0:		https://src.fedoraproject.org/rpms/gamin/raw/master/f/0002-Fix-compilation-of-recent-glib-removing-G_CONST_RETU.patch
+# See https://bugzilla.gnome.org/show_bug.cgi?id=667230
+Patch1:		https://src.fedoraproject.org/rpms/gamin/raw/master/f/0004-fix-possible-server-deadlock-in-ih_sub_cancel.patch
 Patch2:		gamin-0.1.10-no-abstract-sockets.patch
-Patch3:		clang_FTBFS_Wreturn-type.patch
+Patch3:		gamin-return.patch
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(python2)
 Requires:	%{libname} = %{version}-%{release}

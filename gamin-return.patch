@@ -1,0 +1,23 @@
+diff -Naur gamin-0.1.10/server/gam_eq.c gamin-0.1.10.tpg/server/gam_eq.c
+--- gamin-0.1.10/server/gam_eq.c	2007-07-04 13:36:49.000000000 +0000
++++ gamin-0.1.10.tpg/server/gam_eq.c	2020-12-11 10:31:01.262000000 +0000
+@@ -124,7 +124,7 @@
+ {
+ 	gboolean done_work = FALSE;
+ 	if (!eq)
+-		return;
++		return TRUE;
+ 
+ #ifdef GAM_EQ_VERBOSE
+ 	GAM_DEBUG(DEBUG_INFO, "gam_eq: Flushing event queue for %s\n", gam_connection_get_pidname (conn));
+diff -Naur gamin-0.1.10/server/gam_server.c gamin-0.1.10.tpg/server/gam_server.c
+--- gamin-0.1.10/server/gam_server.c	2007-07-04 13:36:49.000000000 +0000
++++ gamin-0.1.10.tpg/server/gam_server.c	2020-12-11 10:31:26.994000000 +0000
+@@ -532,6 +532,7 @@
+     g_io_channel_read_chars(pipe_read_ioc, buf, sizeof(buf), NULL, NULL);
+ 
+   gam_error_check();
++  return TRUE;
+ }  
+ 
+ static void
