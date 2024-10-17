@@ -12,7 +12,7 @@ Version:	0.1.10
 Release:	25
 License:	LGPLv2+
 Group:		Monitoring
-Url:		http://www.gnome.org/~veillard/gamin/
+Url:		https://www.gnome.org/~veillard/gamin/
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gamin/%{url_ver}/gamin-%{version}.tar.bz2
 Patch0:		https://src.fedoraproject.org/rpms/gamin/raw/master/f/0002-Fix-compilation-of-recent-glib-removing-G_CONST_RETU.patch
 # See https://bugzilla.gnome.org/show_bug.cgi?id=667230
