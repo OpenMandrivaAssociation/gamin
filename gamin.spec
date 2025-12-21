@@ -19,6 +19,11 @@ Patch0:		https://src.fedoraproject.org/rpms/gamin/raw/master/f/0002-Fix-compilat
 Patch1:		https://src.fedoraproject.org/rpms/gamin/raw/master/f/0004-fix-possible-server-deadlock-in-ih_sub_cancel.patch
 Patch2:		gamin-0.1.10-no-abstract-sockets.patch
 Patch3:		gamin-return.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(python2)
 Requires:	%{libname} = %{version}-%{release}
